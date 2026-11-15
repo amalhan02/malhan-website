@@ -8,6 +8,7 @@ window.MALHAN_SITE = {
   appUrl: "https://amalhan02.github.io/malhan-trading-company/",
 
   // Switches the owner can flip in GitHub's editor:
+  showRates: false,   // false = no prices anywhere ("Our products" list only); true = MRP per pack, "Today's rates"
   showStock: false,   // false = every product shows "Available"; true = real Available / Out of stock from the app
   enquiries: false    // false = no "Keep aside" buttons or booking form; true = farmers can send keep-aside requests
 };

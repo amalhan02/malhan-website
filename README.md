@@ -98,6 +98,7 @@ So the shop shows up on Google Maps and Search with the right details:
 | `enquiryUrl` | The `enquiry` Edge Function |
 | `turnstileSiteKey` | Cloudflare Turnstile site key, or `""` to switch the check off |
 | `appUrl` | Where the small "Staff login" link in the footer goes |
+| `showRates` | `false` (now): no prices anywhere; the section is called "Our products" and lists items with pack size. `true`: "Today's rates" with MRP per pack from the shop app |
 | `showStock` | `false` (now): every product shows "Available". `true`: shows real Available / Out of stock from the shop app |
 | `enquiries` | `false` (now): no "Keep aside" buttons and no booking form. `true`: farmers can send keep-aside requests, which appear in the app's Enquiries tab |
 
