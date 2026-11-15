@@ -5,5 +5,9 @@ window.MALHAN_SITE = {
   supabaseAnonKey: "sb_publishable_2_ydRdpAkqK36vePWyA3Aw_UFS81hiE",
   enquiryUrl: "https://ivongycdwxxpeurrhkpj.supabase.co/functions/v1/enquiry",
   turnstileSiteKey: "",   // owner fills in; when empty, skip loading Turnstile widget and send token ""
-  appUrl: "https://amalhan02.github.io/malhan-trading-company/"
+  appUrl: "https://amalhan02.github.io/malhan-trading-company/",
+
+  // Switches the owner can flip in GitHub's editor:
+  showStock: false,   // false = every product shows "Available"; true = real Available / Out of stock from the app
+  enquiries: false    // false = no "Keep aside" buttons or booking form; true = farmers can send keep-aside requests
 };

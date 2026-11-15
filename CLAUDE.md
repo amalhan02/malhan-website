@@ -32,6 +32,7 @@ Only phone number shown anywhere: **9317929928** (WhatsApp `wa.me/919317929928`)
 - Indian formatting: `₹` via `Intl.NumberFormat("en-IN")`, dates like "15 Nov 2026" (`en-IN`, `month: "short"`), times like "10:20 am".
 - **Everything rendered from data goes through `esc()`** (product names, ids, user input echoed back).
 - Stock is shown only as "Available" / "Out of stock" — never "low" or quantities. `mrp: null` shows "Call for rate".
+- Owner switches in `config.js` (missing = on): `showStock: false` shows every product as Available; `enquiries: false` adds `html.no-enq`, which hides everything marked `.enq-only` (nav link, enquiry section), drops the Keep aside buttons and never loads Turnstile. Both are currently `false` by the owner's choice. New booking-related markup must carry `enq-only`. Tests run with both on, plus one test against the real `config.js`.
 - Rates: fetch on load, then every 5 min while the tab is visible; last good response cached in `localStorage` (`malhan-site-catalog`). On failure with cache → "As of <time>"; with no cache (or empty list) → "Call for today's rates" with call/WhatsApp buttons.
 - Form: mobile normalised (strip spaces, +91, leading 0) then `^[6-9][0-9]{9}$`; bags integer 1–500; name 2–60 chars. Every error message offers call/WhatsApp.
 
