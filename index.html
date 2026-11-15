@@ -203,6 +203,89 @@ section.s{padding:60px 0}
 .sell .more svg{transition:transform .2s}
 .sell a:hover .more svg{transform:translateX(4px)}
 
+/* Scroll reveal (only when JS runs; reduced motion shows everything at once) */
+html.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+html.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html.js .reveal{opacity:1;transform:none}}
+
+/* Know your crop */
+.know{display:grid;gap:26px;margin-bottom:72px}
+@media (min-width:900px){.know{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:52px;align-items:center}}
+.plant-fig{margin:0;background:linear-gradient(180deg,var(--subtle),var(--tint));border:1px solid var(--line);border-radius:var(--r-lg);padding:18px 18px 12px}
+.plant{display:block;width:100%;max-width:330px;height:auto;margin:0 auto;overflow:visible}
+.plant-cap{text-align:center;margin-top:6px;font-weight:700;color:var(--brand);font-size:15px;min-height:1.5em}
+.plant-cap [data-for]{display:none}
+.know[data-n="N"] .plant-cap [data-for="N"],.know[data-n="P"] .plant-cap [data-for="P"],.know[data-n="K"] .plant-cap [data-for="K"],.know[data-n="S"] .plant-cap [data-for="S"]{display:inline}
+.plant .p-root{stroke:#B89C64}
+.plant .p-stem path:first-child{stroke:#6FA64B}
+.plant .p-leaf{fill:#7FB65A}
+.plant .p-ear .grains{fill:#DCBD5F;stroke:#B98F2E;stroke-width:1}
+.plant .p-ear .awns{stroke:#B98F2E}
+.plant .p-leaf,.plant .p-ear{transform-origin:130px 222px;animation:sway 6s ease-in-out infinite}
+@keyframes sway{50%{transform:rotate(1.5deg)}}
+.plant :is(.p-root,.p-stem,.p-leaf,.p-ear,.p-soil){transition:opacity .5s,filter .5s}
+.know[data-n] .plant :is(.p-root,.p-stem,.p-leaf,.p-ear,.p-soil){opacity:.38}
+.know[data-n="N"] .plant :is(.p-leaf,.p-stem),.know[data-n="P"] .plant .p-root,.know[data-n="K"] .plant :is(.p-ear,.p-stem),.know[data-n="S"] .plant :is(.p-soil,.p-leaf){opacity:1;filter:drop-shadow(0 0 7px rgba(139,195,74,.75))}
+.plant .p-dots circle{fill:var(--lime);opacity:0;animation:rise 2.6s ease-in infinite}
+.plant .p-dots .d2{animation-delay:.9s}.plant .p-dots .d3{animation-delay:1.7s}
+@keyframes rise{0%{opacity:0;transform:translateY(0)}15%{opacity:1}100%{opacity:0;transform:translateY(-150px)}}
+.know[data-n="P"] .plant .p-dots circle{animation-name:spread}
+@keyframes spread{0%{opacity:0;transform:translate(0,0)}20%{opacity:1}100%{opacity:0;transform:translate(-26px,22px)}}
+.know[data-n="K"] .plant .p-dots circle{animation-duration:2.2s}
+.plant .p-zn{stroke:#E9B949;opacity:0;transition:opacity .5s}
+.know[data-n="S"] .plant .p-zn{opacity:1}
+.ntabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px}
+.ntabs button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:66px;padding:8px 4px;border-radius:14px;border:1px solid var(--line-2);background:var(--surface);cursor:pointer;color:var(--ink-2);font-size:12.5px;line-height:1.2;transition:background .2s,border-color .2s,color .2s,transform .2s}
+.ntabs button b{font-size:19px;font-weight:800;color:var(--brand);letter-spacing:.02em}
+.ntabs button:hover{border-color:var(--leaf);transform:translateY(-1px)}
+.ntabs button[aria-selected="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
+.ntabs button[aria-selected="true"] b{color:var(--lime)}
+.npan{animation:fadein .4s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}}
+.npan h3{font-size:clamp(20px,3vw,24px);font-weight:750;color:var(--brand);letter-spacing:-.01em}
+.npan dl{margin:16px 0 0;display:grid;gap:12px}
+.npan dl div{display:grid;grid-template-columns:120px minmax(0,1fr);gap:10px;align-items:start}
+@media (max-width:559px){.npan dl div{grid-template-columns:1fr;gap:2px}}
+.npan dt{font-size:13.5px;font-weight:700;color:var(--leaf);padding-top:2px}
+.npan dd{margin:0;color:var(--ink-2)}
+.nprod{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;color:var(--muted);font-size:14.5px;font-weight:600}
+.nprod a{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:6px 14px;border-radius:999px;background:var(--tint);color:var(--brand);text-decoration:none;font-weight:700;font-size:14px;transition:background .15s}
+.nprod a:hover{background:var(--brand-50);box-shadow:inset 0 0 0 1px var(--leaf)}
+.nprod a small{font-weight:600;color:var(--accent-ink);font-size:12.5px}
+.season-h h3{font-size:clamp(22px,3.4vw,28px);font-weight:800;color:var(--brand);letter-spacing:-.01em}
+.season-h p{margin-top:8px;color:var(--muted);max-width:52em}
+.season{list-style:none;margin:28px 0 0;padding:0;position:relative;display:grid;gap:22px}
+.season::before,.season::after{content:"";position:absolute;left:15px;top:8px;bottom:8px;width:3px;border-radius:3px;background:var(--line)}
+.season::after{background:linear-gradient(var(--lime),var(--leaf));transform:scaleY(0);transform-origin:top;transition:transform 1.8s cubic-bezier(.2,.7,.2,1)}
+.season.in::after{transform:scaleY(1)}
+.season li{position:relative;padding-left:48px}
+.season li i{position:absolute;left:5px;top:3px;width:23px;height:23px;border-radius:50%;background:var(--surface);border:3px solid var(--line);transition:border-color .4s,background .4s}
+.season.in li i{border-color:var(--leaf);background:var(--lime)}
+.season li:nth-child(2) i{transition-delay:.3s}.season li:nth-child(3) i{transition-delay:.6s}.season li:nth-child(4) i{transition-delay:.9s}.season li:nth-child(5) i{transition-delay:1.2s}.season li:nth-child(6) i{transition-delay:1.5s}
+.season li b{display:block;font-size:17px;color:var(--brand)}
+.season li small{display:block;color:var(--accent-ink);font-weight:700;font-size:13.5px;margin:2px 0 6px}
+.season li p{color:var(--ink-2);font-size:15px;max-width:56em}
+@media (min-width:900px){
+  .season{grid-template-columns:repeat(6,1fr);gap:18px}
+  .season::before,.season::after{left:11px;right:11px;top:11px;bottom:auto;width:auto;height:3px}
+  .season::after{background:linear-gradient(90deg,var(--lime),var(--leaf));transform:scaleX(0);transform-origin:left}
+  .season.in::after{transform:scaleX(1)}
+  .season li{padding:40px 0 0}
+  .season li i{left:0;top:0}
+  .season li p{font-size:14.5px}
+}
+
+/* Nutrient / variety badge on product cards */
+.nb{display:flex;align-items:center;gap:9px;margin-top:8px}
+.nbm{display:inline-flex;align-items:flex-end;gap:2px;height:18px;flex:none}
+.nbm i{display:block;width:5px;height:calc(3px + var(--v) * .25px);border-radius:2px;background:var(--leaf)}
+.nbm i:nth-child(2){background:var(--gold)}
+.nbm i:nth-child(3){background:var(--brand)}
+.nbm i[style="--v:0"]{opacity:.22}
+.nbt .l{display:block;font-size:13px;color:var(--brand);font-weight:700;line-height:1.3}
+.nbt .s{display:block;font-size:12.5px;color:var(--muted);line-height:1.3}
+.nb.seed .nbt .l{color:var(--accent-ink)}
+
 /* Products */
 #rates{background:var(--subtle)}
 .rates-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-bottom:20px}
@@ -365,6 +448,7 @@ footer .staff{color:var(--muted);font-size:13.5px;display:inline-flex;min-height
       <small><span class="hi" lang="hi">ओढां (सिरसा) · NFL डीलर</span><span class="en" lang="en">Odhan (Sirsa) · NFL dealer</span></small></span>
     </a>
     <nav class="mainnav" aria-label="Sections">
+      <a href="#know"><span class="hi" lang="hi">खेती की समझ</span><span class="en" lang="en">Know your crop</span></a>
       <a href="#rates"><span class="rates-only"><span class="hi" lang="hi">आज के रेट</span><span class="en" lang="en">Today's rates</span></span><span class="norates-only"><span class="hi" lang="hi">हमारे उत्पाद</span><span class="en" lang="en">Our products</span></span></a>
       <a href="#enquiry" class="enq-only"><span class="hi" lang="hi">माल रखवाएं</span><span class="en" lang="en">Keep aside</span></a>
       <a href="#about"><span class="hi" lang="hi">हमारे बारे में</span><span class="en" lang="en">About</span></a>
@@ -441,6 +525,111 @@ footer .staff{color:var(--muted);font-size:13.5px;display:inline-flex;min-height
         <span class="more"><span class="rates-only"><span class="hi" lang="hi">दवाइयों के रेट</span><span class="en" lang="en">Pesticide rates</span></span><span class="norates-only"><span class="hi" lang="hi">दवाइयां देखें</span><span class="en" lang="en">See pesticides</span></span><svg class="i"><use href="#i-arrow"/></svg></span>
       </a>
     </div>
+  </div>
+</section>
+
+<section class="s" id="know" aria-labelledby="know-h">
+  <div class="wrap">
+    <div class="s-h reveal">
+      <h2 id="know-h"><span class="hi" lang="hi">गेहूं को क्या चाहिए</span><span class="en" lang="en">What your wheat needs</span></h2>
+      <p><span class="hi" lang="hi">हर खाद पौधे के एक हिस्से का काम करती है। नीचे दबाकर देखें कौन-सी खाद कहाँ असर करती है।</span><span class="en" lang="en">Each fertilizer feeds a different part of the plant. Tap a nutrient to see where it works and which of our products carry it.</span></p>
+    </div>
+
+    <div class="know reveal" id="knowBox" data-n="N">
+      <figure class="plant-fig" aria-hidden="true">
+        <svg class="plant" viewBox="0 0 260 300">
+          <defs>
+            <linearGradient id="g-soil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C9A35B" stop-opacity=".35"/><stop offset="1" stop-color="#8A6A2E" stop-opacity=".55"/></linearGradient>          </defs>
+          <g class="p-soil"><path d="M0 222 Q65 210 130 218 T260 216 V300 H0Z" fill="url(#g-soil)"/><path d="M0 222 Q65 210 130 218 T260 216" fill="none" stroke="#8A6A2E" stroke-opacity=".5" stroke-width="2"/></g>
+          <g class="p-root" fill="none" stroke-linecap="round" stroke-width="3.5">
+            <path d="M130 222 C128 240 118 252 104 266"/><path d="M130 222 C132 242 142 254 156 268"/><path d="M130 222 C129 250 127 268 126 286"/>
+            <path d="M121 244 C112 250 104 252 96 254" stroke-width="2.5"/><path d="M139 246 C148 252 156 254 164 256" stroke-width="2.5"/><path d="M128 262 C120 268 114 274 108 282" stroke-width="2"/><path d="M131 264 C138 270 144 276 150 284" stroke-width="2"/>
+          </g>
+          <g class="p-stem" fill="none" stroke-linecap="round"><path d="M130 222 C131 180 131 130 130 78" stroke-width="6"/><path d="M130 222 C131 180 131 130 130 78" stroke="#fff" stroke-opacity=".18" stroke-width="2"/></g>
+          <g class="p-leaf">
+            <path d="M130 190 C105 184 78 190 56 214 C84 214 110 206 130 190Z"/>
+            <path d="M130 150 C158 142 186 150 206 176 C178 176 150 166 130 150Z"/>
+            <path d="M130 118 C110 108 90 108 72 124 C92 128 114 128 130 118Z"/>
+            <path d="M130 94 C146 84 166 84 182 96 C164 102 146 102 130 94Z"/>
+          </g>
+          <g class="p-ear">
+            <g class="awns" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M126 70 L116 14"/><path d="M130 66 L130 8"/><path d="M134 70 L144 14"/><path d="M123 60 L108 24"/><path d="M137 60 L152 24"/></g>
+            <g class="grains">
+              <ellipse cx="130" cy="74" rx="7" ry="9"/><ellipse cx="121" cy="66" rx="6.5" ry="8.5" transform="rotate(-22 121 66)"/><ellipse cx="139" cy="66" rx="6.5" ry="8.5" transform="rotate(22 139 66)"/>
+              <ellipse cx="130" cy="58" rx="6.5" ry="8.5"/><ellipse cx="122" cy="50" rx="6" ry="8" transform="rotate(-22 122 50)"/><ellipse cx="138" cy="50" rx="6" ry="8" transform="rotate(22 138 50)"/>
+              <ellipse cx="130" cy="42" rx="6" ry="8"/><ellipse cx="123" cy="35" rx="5.5" ry="7.5" transform="rotate(-22 123 35)"/><ellipse cx="137" cy="35" rx="5.5" ry="7.5" transform="rotate(22 137 35)"/><ellipse cx="130" cy="27" rx="5.5" ry="7.5"/>
+            </g>
+          </g>
+          <g class="p-dots"><circle class="d1" cx="118" cy="250" r="3.2"/><circle class="d2" cx="142" cy="258" r="2.6"/><circle class="d3" cx="128" cy="270" r="2.2"/></g>
+          <g class="p-zn" fill="none" stroke-width="2" stroke-linecap="round"><path d="M96 120 C104 118 112 118 120 119"/><path d="M150 92 C158 90 166 90 172 92"/><path d="M160 162 C170 162 180 165 190 170"/></g>
+        </svg>
+        <figcaption class="plant-cap">
+          <span data-for="N"><span class="hi" lang="hi">पत्तियाँ व बढ़वार</span><span class="en" lang="en">Leaves and growth</span></span>
+          <span data-for="P"><span class="hi" lang="hi">जड़ें व जमाव</span><span class="en" lang="en">Roots and establishment</span></span>
+          <span data-for="K"><span class="hi" lang="hi">दाना व तना</span><span class="en" lang="en">Grain and stem</span></span>
+          <span data-for="S"><span class="hi" lang="hi">मिट्टी व नई पत्तियाँ</span><span class="en" lang="en">Soil and young leaves</span></span>
+        </figcaption>
+      </figure>
+
+      <div class="know-side">
+        <div class="ntabs" role="tablist" aria-label="Nutrient">
+          <button type="button" role="tab" id="tab-N" aria-controls="pan-N" aria-selected="true" data-n="N"><b>N</b><span><span class="hi" lang="hi">नाइट्रोजन</span><span class="en" lang="en">Nitrogen</span></span></button>
+          <button type="button" role="tab" id="tab-P" aria-controls="pan-P" aria-selected="false" data-n="P" tabindex="-1"><b>P</b><span><span class="hi" lang="hi">फॉस्फोरस</span><span class="en" lang="en">Phosphorus</span></span></button>
+          <button type="button" role="tab" id="tab-K" aria-controls="pan-K" aria-selected="false" data-n="K" tabindex="-1"><b>K</b><span><span class="hi" lang="hi">पोटाश</span><span class="en" lang="en">Potash</span></span></button>
+          <button type="button" role="tab" id="tab-S" aria-controls="pan-S" aria-selected="false" data-n="S" tabindex="-1"><b>S·Zn</b><span><span class="hi" lang="hi">सल्फर व ज़िंक</span><span class="en" lang="en">Sulphur and zinc</span></span></button>
+        </div>
+
+        <div class="npan" id="pan-N" role="tabpanel" aria-labelledby="tab-N">
+          <h3><span class="hi" lang="hi">नाइट्रोजन: हरी-भरी पत्तियाँ और ज़्यादा कल्ले</span><span class="en" lang="en">Nitrogen: green leaves and more tillers</span></h3>
+          <dl>
+            <div><dt><span class="hi" lang="hi">क्या करता है</span><span class="en" lang="en">What it does</span></dt><dd><span class="hi" lang="hi">पत्तियों का हरा रंग (क्लोरोफिल) बनाता है, जिससे पौधा धूप से खाना बनाता है। कल्ले और बढ़वार इसी से आती है।</span><span class="en" lang="en">Builds the green pigment (chlorophyll) that turns sunlight into food. Tillers and fast growth come from it.</span></dd></div>
+            <div><dt><span class="hi" lang="hi">कमी के लक्षण</span><span class="en" lang="en">Signs of shortage</span></dt><dd><span class="hi" lang="hi">पुरानी, नीचे की पत्तियाँ सिरे से पीली पड़ती हैं; पौधा छोटा और पतला रहता है।</span><span class="en" lang="en">Older, lower leaves turn yellow from the tip; the plant stays short and thin.</span></dd></div>
+            <div><dt><span class="hi" lang="hi">कब दें</span><span class="en" lang="en">When to apply</span></dt><dd><span class="hi" lang="hi">आधी बुवाई पर, बाकी पहले पानी (करीब 3 हफ़्ते) के साथ। एक साथ देने से बर्बाद होती है।</span><span class="en" lang="en">Half at sowing, the rest with the first watering (about 3 weeks). Given all at once, much of it is lost.</span></dd></div>
+          </dl>
+          <p class="nprod"><span class="hi" lang="hi">हमारे पास:</span><span class="en" lang="en">We stock:</span> <a href="#rates" data-cat="Fertilizer">Urea <small>46% N</small></a><a href="#rates" data-cat="Fertilizer">DAP <small>18% N</small></a><a href="#rates" data-cat="Fertilizer">Ammonium sulphate <small>20.6% N</small></a></p>
+        </div>
+        <div class="npan" id="pan-P" role="tabpanel" aria-labelledby="tab-P" hidden>
+          <h3><span class="hi" lang="hi">फॉस्फोरस: मज़बूत जड़ें और जल्दी जमाव</span><span class="en" lang="en">Phosphorus: strong roots and a quick start</span></h3>
+          <dl>
+            <div><dt><span class="hi" lang="hi">क्या करता है</span><span class="en" lang="en">What it does</span></dt><dd><span class="hi" lang="hi">जड़ें फैलाता है और पौधे को ऊर्जा देता है। जड़ें गहरी तो पानी-खाद दोनों ज़्यादा मिलते हैं और दाना अच्छा बनता है।</span><span class="en" lang="en">Spreads the roots and moves energy inside the plant. Deeper roots reach more water and food, and set grain better.</span></dd></div>
+            <div><dt><span class="hi" lang="hi">कमी के लक्षण</span><span class="en" lang="en">Signs of shortage</span></dt><dd><span class="hi" lang="hi">पत्तियाँ गहरी हरी-बैंगनी सी, कल्ले कम, पकना देर से।</span><span class="en" lang="en">Leaves dark bluish-green with a purple tint, few tillers, late ripening.</span></dd></div>
+            <div><dt><span class="hi" lang="hi">कब दें</span><span class="en" lang="en">When to apply</span></dt><dd><span class="hi" lang="hi">पूरी मात्रा बुवाई के समय, बीज के पास। मिट्टी में ज़्यादा चलती नहीं, इसलिए बाद में डालने से फ़ायदा कम।</span><span class="en" lang="en">All of it at sowing, close to the seed. It barely moves in soil, so adding it later helps little.</span></dd></div>
+          </dl>
+          <p class="nprod"><span class="hi" lang="hi">हमारे पास:</span><span class="en" lang="en">We stock:</span> <a href="#rates" data-cat="Fertilizer">DAP <small>46% P</small></a><a href="#rates" data-cat="Fertilizer">TSP <small>46% P</small></a><a href="#rates" data-cat="Fertilizer">SSP <small>16% P + S</small></a><a href="#rates" data-cat="Fertilizer">ZSSP <small>16% P + Zn</small></a></p>
+        </div>
+        <div class="npan" id="pan-K" role="tabpanel" aria-labelledby="tab-K" hidden>
+          <h3><span class="hi" lang="hi">पोटाश: भारी दाना और मज़बूत तना</span><span class="en" lang="en">Potash: plump grain and a stem that stands</span></h3>
+          <dl>
+            <div><dt><span class="hi" lang="hi">क्या करता है</span><span class="en" lang="en">What it does</span></dt><dd><span class="hi" lang="hi">पानी का संतुलन रखता है, दाने में स्टार्च भरता है और तने को मज़बूत करता है ताकि फसल गिरे नहीं। रोग व पाले से भी बचाता है।</span><span class="en" lang="en">Controls water inside the plant, fills grain with starch and stiffens the stem so the crop doesn't fall over. Helps against disease and frost.</span></dd></div>
+            <div><dt><span class="hi" lang="hi">कमी के लक्षण</span><span class="en" lang="en">Signs of shortage</span></dt><dd><span class="hi" lang="hi">पत्तियों के किनारे झुलसे-भूरे, कमज़ोर तना, हल्का दाना।</span><span class="en" lang="en">Scorched brown leaf edges, weak stems, light grain.</span></dd></div>
+            <div><dt><span class="hi" lang="hi">कब दें</span><span class="en" lang="en">When to apply</span></dt><dd><span class="hi" lang="hi">बुवाई के समय, DAP के साथ।</span><span class="en" lang="en">At sowing, together with DAP.</span></dd></div>
+          </dl>
+          <p class="nprod"><span class="hi" lang="hi">हमारे पास:</span><span class="en" lang="en">We stock:</span> <a href="#rates" data-cat="Fertilizer">MOP <small>60% K</small></a></p>
+        </div>
+        <div class="npan" id="pan-S" role="tabpanel" aria-labelledby="tab-S" hidden>
+          <h3><span class="hi" lang="hi">सल्फर व ज़िंक: हमारी मिट्टी में अक्सर कम</span><span class="en" lang="en">Sulphur and zinc: often short in our soil</span></h3>
+          <dl>
+            <div><dt><span class="hi" lang="hi">क्या करते हैं</span><span class="en" lang="en">What they do</span></dt><dd><span class="hi" lang="hi">सल्फर प्रोटीन और तेल बनाता है (सरसों के लिए ज़रूरी)। ज़िंक पौधे के एंजाइम चलाता है, जिनसे बढ़वार होती है।</span><span class="en" lang="en">Sulphur builds protein and oil (vital for mustard). Zinc runs the plant's enzymes, which drive growth.</span></dd></div>
+            <div><dt><span class="hi" lang="hi">कमी के लक्षण</span><span class="en" lang="en">Signs of shortage</span></dt><dd><span class="hi" lang="hi">ज़िंक: नई पत्तियों पर पीली-भूरी धारियाँ ("खैरा")। सल्फर: ऊपर की नई पत्तियाँ पीली। हरियाणा के आधे से ज़्यादा मिट्टी नमूनों में ज़िंक कम पाया गया है।</span><span class="en" lang="en">Zinc: yellow-brown stripes on young leaves ("khaira"). Sulphur: the new top leaves turn pale. Over half of Haryana's soil samples test low in zinc.</span></dd></div>
+            <div><dt><span class="hi" lang="hi">कब दें</span><span class="en" lang="en">When to apply</span></dt><dd><span class="hi" lang="hi">बुवाई पर; ज़िंक हर 2–3 फसल में एक बार काफ़ी है। मिट्टी की जाँच (सॉइल हेल्थ कार्ड) से पक्का करें।</span><span class="en" lang="en">At sowing; zinc once every 2–3 crops is enough. Confirm with a soil test (soil health card).</span></dd></div>
+          </dl>
+          <p class="nprod"><span class="hi" lang="hi">हमारे पास:</span><span class="en" lang="en">We stock:</span> <a href="#rates" data-cat="Fertilizer">ZSSP <small>Zn + S + P</small></a><a href="#rates" data-cat="Fertilizer">Sulphur <small>90% S</small></a><a href="#rates" data-cat="Fertilizer">Ammonium sulphate <small>24% S</small></a><a href="#rates" data-cat="Fertilizer">SSP <small>11% S</small></a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="season-h reveal">
+      <h3><span class="hi" lang="hi">गेहूं का मौसम: कब क्या दें</span><span class="en" lang="en">The wheat season: what to apply when</span></h3>
+      <p><span class="hi" lang="hi">हरियाणा में सिंचित गेहूं का सामान्य तरीका, एक एकड़ के लिए। अपनी मिट्टी की जाँच के हिसाब से मात्रा घटाएँ-बढ़ाएँ, या दुकान पर पूछें।</span><span class="en" lang="en">Typical practice for irrigated wheat in Haryana, per acre. Adjust to your soil test, or ask us at the shop.</span></p>
+    </div>
+    <ol class="season reveal" id="season">
+      <li><i></i><b><span class="hi" lang="hi">बुवाई</span><span class="en" lang="en">Sowing</span></b><small><span class="hi" lang="hi">25 अक्टूबर – 25 नवंबर</span><span class="en" lang="en">25 Oct – 25 Nov</span></small><p><span class="hi" lang="hi">DAP 1 बैग + MOP करीब 20 किलो + यूरिया का आधा हिस्सा (करीब 1 बैग)। ज़िंक कम हो तो ZSSP। अगेती बुवाई के लिए DBW-303 / DBW-327 / PBW-872, समय पर बुवाई के लिए DBW-187 / DBW-222।</span><span class="en" lang="en">1 bag DAP + about 20 kg MOP + half the urea (about 1 bag). ZSSP if zinc is low. For early sowing DBW-303 / DBW-327 / PBW-872; for timely sowing DBW-187 / DBW-222.</span></p></li>
+      <li><i></i><b><span class="hi" lang="hi">पहला पानी</span><span class="en" lang="en">First watering</span></b><small><span class="hi" lang="hi">करीब 3 हफ़्ते (20–25 दिन)</span><span class="en" lang="en">About 3 weeks (20–25 days)</span></small><p><span class="hi" lang="hi">यह सबसे ज़रूरी पानी है, इसी समय नई जड़ें बनती हैं। बाकी यूरिया (करीब 1 बैग) पानी के साथ दें।</span><span class="en" lang="en">The most important watering: new roots form now. Give the rest of the urea (about 1 bag) with it.</span></p></li>
+      <li><i></i><b><span class="hi" lang="hi">कल्ले फूटना</span><span class="en" lang="en">Tillering</span></b><small><span class="hi" lang="hi">40–45 दिन</span><span class="en" lang="en">40–45 days</span></small><p><span class="hi" lang="hi">दूसरा पानी। खरपतवार (मंडूसी, बथुआ) पर अब काबू करें। पीलापन दिखे तो थोड़ा यूरिया।</span><span class="en" lang="en">Second watering. Control weeds (Phalaris, Chenopodium) now. A little urea if the crop looks pale.</span></p></li>
+      <li><i></i><b><span class="hi" lang="hi">बाली व फूल</span><span class="en" lang="en">Heading and flowering</span></b><small><span class="hi" lang="hi">85–95 दिन</span><span class="en" lang="en">85–95 days</span></small><p><span class="hi" lang="hi">पानी ज़रूरी, खाद नहीं। पीले रतुए (रस्ट) के धब्बों पर नज़र रखें।</span><span class="en" lang="en">Water matters, fertilizer doesn't. Watch for yellow rust spots.</span></p></li>
+      <li><i></i><b><span class="hi" lang="hi">दाना भरना</span><span class="en" lang="en">Grain filling</span></b><small><span class="hi" lang="hi">100–120 दिन</span><span class="en" lang="en">100–120 days</span></small><p><span class="hi" lang="hi">हल्का पानी। बुवाई में दिया पोटाश अब दाना भारी करता है।</span><span class="en" lang="en">Light watering. The potash given at sowing fills the grain now.</span></p></li>
+      <li><i></i><b><span class="hi" lang="hi">कटाई</span><span class="en" lang="en">Harvest</span></b><small><span class="hi" lang="hi">अप्रैल (140–150 दिन)</span><span class="en" lang="en">April (140–150 days)</span></small><p><span class="hi" lang="hi">दाना सख्त और नमी 12–14% पर काटें। अगली फसल के लिए मिट्टी की जाँच करवाएँ।</span><span class="en" lang="en">Cut when the grain is hard, at 12–14% moisture. Get the soil tested for the next crop.</span></p></li>
+    </ol>
   </div>
 </section>
 
@@ -827,12 +1016,45 @@ footer .staff{color:var(--muted);font-size:13.5px;display:inline-flex;min-height
     }).join("");
   }
 
+  /* ---------- Know your crop: what each product carries (shown as a badge on its card) ---------- */
+  // Nutrient % by weight (N, P2O5, K2O); x = extra nutrients. Varieties: sowing window + trait (ICAR-IIWBR / PAU).
+  var KNOW = {
+    urea: { n: 46, p: 0, k: 0, use: { hi: "आधा बुवाई पर, आधा पहले पानी पर", en: "Half at sowing, half at first watering" } },
+    dap: { n: 18, p: 46, k: 0, use: { hi: "बुवाई के समय, बीज के पास", en: "At sowing, close to the seed" } },
+    mop: { n: 0, p: 0, k: 60, use: { hi: "बुवाई पर; दाना भारी, तना मज़बूत", en: "At sowing; plump grain, strong stem" } },
+    tsp: { n: 0, p: 46, k: 0, use: { hi: "बुवाई पर, DAP की जगह (बिना N)", en: "At sowing, in place of DAP (no N)" } },
+    ssp: { n: 0, p: 16, k: 0, x: "S 11%", use: { hi: "बुवाई पर; सल्फर भी देता है", en: "At sowing; also gives sulphur" } },
+    zssp: { n: 0, p: 16, k: 0, x: "S 11% · Zn", use: { hi: "बुवाई पर; ज़िंक की कमी वाली मिट्टी के लिए", en: "At sowing; for zinc-short soil" } },
+    ammoniumsulphate: { n: 20.6, p: 0, k: 0, x: "S 24%", use: { hi: "बुवाई या पहले पानी पर; सरसों में बढ़िया", en: "At sowing or first watering; good for mustard" } },
+    sulphur: { n: 0, p: 0, k: 0, x: "S 90%", use: { hi: "बुवाई पर मिट्टी में; सरसों व तेल वाली फसलों के लिए", en: "In soil at sowing; for mustard and oilseeds" } },
+    dbw187: { seed: 1, win: { hi: "बुवाई 5–25 नवंबर", en: "Sow 5–25 Nov" }, trait: { hi: "करण वंदना · रतुआ रोधी", en: "Karan Vandana · rust resistant" } },
+    dbw222: { seed: 1, win: { hi: "बुवाई 5–25 नवंबर", en: "Sow 5–25 Nov" }, trait: { hi: "करण नरेंद्र · गिरती नहीं", en: "Karan Narendra · stands well" } },
+    dbw303: { seed: 1, win: { hi: "अगेती: 25 अक्टूबर – 5 नवंबर", en: "Early: 25 Oct – 5 Nov" }, trait: { hi: "करण वैष्णवी · बहुत अधिक उपज", en: "Karan Vaishnavi · very high yield" } },
+    dbw327: { seed: 1, win: { hi: "अगेती: अक्टूबर अंत – नवंबर शुरू", en: "Early: late Oct – early Nov" }, trait: { hi: "करण शिवानी · बहुत अधिक उपज", en: "Karan Shivani · very high yield" } },
+    pbw872: { seed: 1, win: { hi: "अगेती बुवाई", en: "Early sowing" }, trait: { hi: "PAU · अधिक उपज, भूरा रतुआ रोधी", en: "PAU · high yield, brown-rust resistant" } }
+  };
+  function knowFor(p) {
+    var k = String(p.name || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+    if (KNOW[k]) return KNOW[k];
+    if (/^sulphur/.test(k)) return KNOW.sulphur;   // "Sulphur5", "Sulphur25"
+    if (/ssp$/.test(k)) return KNOW.ssp;           // "Zibo SSP"
+    return null;
+  }
+  function badgeHtml(p) {
+    var kn = knowFor(p);
+    if (!kn) return "";
+    if (kn.seed) return '<span class="nb seed"><span class="nbt"><span class="l">' + esc(kn.win[lang]) + '</span><span class="s">' + esc(kn.trait[lang]) + "</span></span></span>";
+    var label = [kn.n && fmtNum(kn.n) + "% N", kn.p && kn.p + "% P", kn.k && kn.k + "% K", kn.x].filter(Boolean).join(" · ");
+    return '<span class="nb"><span class="nbm" aria-hidden="true"><i style="--v:' + kn.n + '"></i><i style="--v:' + kn.p + '"></i><i style="--v:' + kn.k + '"></i></span>' +
+      '<span class="nbt"><span class="l">' + esc(label) + '</span><span class="s">' + esc(kn.use[lang]) + "</span></span></span>";
+  }
+
   function rowHtml(p) {
     var price = !RATES ? "" : p.mrp != null
       ? '<div class="rprice num">' + esc(fmtMoney(p.mrp)) + " <small>/ " + esc(t("pack")[p.pack] || p.pack) + "</small></div>"
       : '<div class="rprice call">' + esc(t("callRate")) + "</div>";
     return '<li class="ritem' + (p.available ? "" : " out") + '" data-id="' + esc(p.id) + '">' +
-      '<div class="rname"><b>' + esc(p.name) + "</b><small>" + esc(packLabel(p)) + "</small></div>" +
+      '<div class="rname"><b>' + esc(p.name) + "</b><small>" + esc(packLabel(p)) + "</small>" + badgeHtml(p) + "</div>" +
       price +
       '<span class="tag' + (p.available ? "" : " off") + '">' + esc(p.available ? t("avail") : t("out")) + "</span>" +
       (ENQ ? '<button type="button" class="btn sm keep" data-keep="' + esc(p.id) + '">' + esc(p.available ? t("keep") : t("ask")) + "</button>" : "") + "</li>";
@@ -1123,6 +1345,52 @@ footer .staff{color:var(--muted);font-size:13.5px;display:inline-flex;min-height
   form.addEventListener("submit", onSubmit);
 
   if (C.appUrl) $("#staffLink").href = C.appUrl;
+
+  /* ---------- Know your crop: nutrient tabs, gentle auto-cycle, scroll reveal ---------- */
+  (function () {
+    document.documentElement.classList.add("js");
+    var qa = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+    var box = document.getElementById("knowBox");
+    if (!box) return;
+    var tabs = qa('.ntabs [role="tab"]', box), panels = qa(".npan", box), order = ["N", "P", "K", "S"], idx = 0, timer = null, touched = false;
+    var motionOK = !(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    function select(n, focus) {
+      idx = Math.max(0, order.indexOf(n)); n = order[idx];
+      box.setAttribute("data-n", n);
+      tabs.forEach(function (b) { var on = b.getAttribute("data-n") === n; b.setAttribute("aria-selected", String(on)); b.tabIndex = on ? 0 : -1; if (on && focus) b.focus(); });
+      panels.forEach(function (p) { p.hidden = p.id !== "pan-" + n; });
+    }
+    function pause() { if (timer) { clearInterval(timer); timer = null; } }
+    function stop() { touched = true; pause(); }
+    function start() { if (!motionOK || touched || timer) return; timer = setInterval(function () { select(order[(idx + 1) % order.length]); }, 4500); }
+    tabs.forEach(function (b) {
+      b.addEventListener("click", function () { stop(); select(b.getAttribute("data-n")); });
+      b.addEventListener("keydown", function (e) {
+        var d = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0;
+        if (!d) return;
+        e.preventDefault(); stop(); select(order[(idx + d + order.length) % order.length], true);
+      });
+    });
+    box.addEventListener("pointerenter", pause);
+    box.addEventListener("pointerleave", start);
+    if ("IntersectionObserver" in window) {
+      var kio = new IntersectionObserver(function (en) { en.forEach(function (x) { if (x.isIntersecting) start(); else pause(); }); }, { threshold: 0.35 });
+      kio.observe(box);
+    } else start();
+    // Reveal: anything whose top has entered the lower 94% of the viewport, or that was scrolled past, fades in.
+    // A rAF-throttled scroll sweep (not IntersectionObserver) so a fast fling on a slow phone can't skip a block.
+    qa(".sell a, #sell .s-h, #rates .s-h, .about > div, .visit > div").forEach(function (el) { el.classList.add("reveal"); });
+    var pending = qa(".reveal"), ticking = false;
+    function sweep() {
+      var h = window.innerHeight * 0.94;
+      pending = pending.filter(function (el) { if (el.getBoundingClientRect().top < h) { el.classList.add("in"); return false; } return true; });
+      if (!pending.length) { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); }
+    }
+    function onScroll() { if (ticking) return; ticking = true; requestAnimationFrame(function () { ticking = false; sweep(); }); }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    sweep();
+  })();
 
   if (ENQ && C.turnstileSiteKey) {
     form.addEventListener("focusin", loadTurnstile, { once: true });
