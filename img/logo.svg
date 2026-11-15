@@ -1,4 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Malhan Trading Company">
-  <rect width="64" height="64" rx="14" fill="#1D6B3B"/>
-  <path d="M15 47V19l17 19 17-19v28" fill="none" stroke="#E3B43E" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Malhan Trading Company">
+  <rect width="512" height="512" rx="112" fill="#1D360B"/>
+  <g transform="translate(256 262) scale(1.46) translate(-500 -262)" stroke-linejoin="round">
+    <g transform="rotate(-34 500 383)"><path d="M500 195C534 239 534 311 500 355C466 311 466 239 500 195Z" fill="#FFF" stroke="#1D360B" stroke-width="10"/><path d="M500 225V325" stroke="#C9A35B" stroke-width="7" stroke-linecap="round"/></g>
+    <g transform="rotate(34 500 383)"><path d="M500 195C534 239 534 311 500 355C466 311 466 239 500 195Z" fill="#FFF" stroke="#1D360B" stroke-width="10"/><path d="M500 225V325" stroke="#C9A35B" stroke-width="7" stroke-linecap="round"/></g>
+    <path d="M500 169C538 219.6 538 302.4 500 353C462 302.4 462 219.6 500 169Z" fill="#FFF" stroke="#1D360B" stroke-width="10"/><path d="M500 204V318" stroke="#C9A35B" stroke-width="7" stroke-linecap="round"/>
+  </g>
 </svg>
