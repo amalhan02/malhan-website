@@ -594,6 +594,7 @@ footer .staff{color:var(--hero-muted);font-size:13.5px;display:inline-flex;min-h
   var WA = "919317929928";
   var TEL = "tel:+919317929928";
   var CATS = ["Fertilizer", "Seed", "Pesticide", "Other"];
+  var PACKS = ["bag", "bottle", "can", "packet", "piece"], UNITS = ["kg", "g", "L", "ml"];
   var CACHE_KEY = "malhan-site-catalog";
   var LANG_KEY = "malhan-site-lang";
   var REFRESH_MS = 5 * 60 * 1000;
@@ -610,6 +611,7 @@ footer .staff{color:var(--hero-muted);font-size:13.5px;display:inline-flex;min-h
   var fmtDate = function (d) { return d.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }); };
   var fmtTime = function (d) { return d.toLocaleTimeString("en-IN", { hour: "numeric", minute: "2-digit", hour12: true }); };
   var fmtWhen = function (d) { return fmtDate(d) + ", " + fmtTime(d); };
+  var fmtNum = function (n) { return new Intl.NumberFormat("en-IN", { maximumFractionDigits: 2 }).format(n); };
   var fmtMoney = function (n) {
     return new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 }).format(n);
   };
@@ -626,8 +628,8 @@ footer .staff{color:var(--hero-muted);font-size:13.5px;display:inline-flex;min-h
       updatedOn: function (s) { return s + " को अपडेट"; },
       live: "दुकान के रजिस्टर से सीधे",
       asOf: function (s) { return s + " तक के रेट · पक्का करने के लिए कॉल करें"; },
-      bag: function (kg) { return kg + " किलो बैग"; },
-      perBag: "/ बैग",
+      pack: { bag: "बैग", bottle: "बोतल", can: "डिब्बा", packet: "पैकेट", piece: "पीस" },
+      unit: { kg: "किलो", g: "ग्राम", L: "लीटर", ml: "ml" },
       callRate: "रेट के लिए कॉल करें",
       avail: "उपलब्ध",
       out: "स्टॉक में नहीं",
@@ -666,8 +668,8 @@ footer .staff{color:var(--hero-muted);font-size:13.5px;display:inline-flex;min-h
       updatedOn: function (s) { return "Updated " + s; },
       live: "Live from the shop's register",
       asOf: function (s) { return "As of " + s + " · call to confirm"; },
-      bag: function (kg) { return kg + " kg bag"; },
-      perBag: "/ bag",
+      pack: { bag: "bag", bottle: "bottle", can: "can", packet: "packet", piece: "piece" },
+      unit: { kg: "kg", g: "g", L: "L", ml: "ml" },
       callRate: "Call for rate",
       avail: "Available",
       out: "Out of stock",
@@ -722,11 +724,16 @@ footer .staff{color:var(--hero-muted);font-size:13.5px;display:inline-flex;min-h
   function normalize(d) {
     var list = (d && Array.isArray(d.products)) ? d.products : [];
     var products = list.filter(function (p) { return p && p.id != null && p.name; }).map(function (p) {
-      var bag = Number(p.bagKg), mrp = Number(p.mrp);
+      var bag = Number(p.bagKg), mrp = Number(p.mrp), size = Number(p.size);
+      var cat = typeof p.category === "string" ? p.category.trim() : "";
+      if (!size || size < 0) size = bag > 0 ? bag : 0;
       return {
         id: String(p.id), name: String(p.name),
-        category: CATS.indexOf(p.category) >= 0 ? p.category : "Other",
-        bagKg: p.bagKg != null && bag > 0 ? bag : null,
+        // built-in categories keep their translations; custom ones (e.g. "Micronutrient") show as typed
+        category: cat || "Other",
+        pack: PACKS.indexOf(p.pack) >= 0 ? p.pack : "bag",
+        size: size > 0 ? size : null,
+        sizeUnit: UNITS.indexOf(p.sizeUnit) >= 0 ? p.sizeUnit : "kg",
         mrp: p.mrp != null && mrp > 0 ? mrp : null,
         available: p.available === true
       };
@@ -761,9 +768,21 @@ footer .staff{color:var(--hero-muted);font-size:13.5px;display:inline-flex;min-h
     el.innerHTML = txt ? "<i></i><span>" + esc(txt) + "</span>" : "";
   }
 
+  // "45 kg bag" / "500 ml bottle" / "bottle" (no size) — in the current language
+  function packLabel(p) {
+    var w = t("pack")[p.pack] || p.pack;
+    return p.size != null ? fmtNum(p.size) + " " + (t("unit")[p.sizeUnit] || p.sizeUnit) + " " + w : w;
+  }
+  function catLabel(c) { return t("cat")[c] || c; }
+
+  // Built-in categories first (in fixed order, "Other" last), then custom ones A–Z.
   function presentCats() {
     if (!catalog) return [];
-    return CATS.filter(function (c) { return catalog.products.some(function (p) { return p.category === c; }); });
+    var seen = {};
+    catalog.products.forEach(function (p) { seen[p.category] = true; });
+    var custom = Object.keys(seen).filter(function (c) { return CATS.indexOf(c) < 0; }).sort(function (a, b) { return a.localeCompare(b, "en-IN"); });
+    var builtIn = CATS.filter(function (c) { return seen[c] && c !== "Other"; });
+    return builtIn.concat(custom, seen.Other ? ["Other"] : []);
   }
 
   function renderChips() {
@@ -771,16 +790,16 @@ footer .staff{color:var(--hero-muted);font-size:13.5px;display:inline-flex;min-h
     if (cats.length < 2) { el.innerHTML = ""; el.hidden = true; return; }
     el.hidden = false;
     el.innerHTML = ["all"].concat(cats).map(function (c) {
-      return '<button type="button" data-filter="' + c + '" aria-pressed="' + (filter === c) + '">' + esc(t("cat")[c]) + "</button>";
+      return '<button type="button" data-filter="' + esc(c) + '" aria-pressed="' + (filter === c) + '">' + esc(c === "all" ? t("cat").all : catLabel(c)) + "</button>";
     }).join("");
   }
 
   function rowHtml(p) {
     var price = p.mrp != null
-      ? '<div class="rprice num">' + esc(fmtMoney(p.mrp)) + " <small>" + esc(t("perBag")) + "</small></div>"
+      ? '<div class="rprice num">' + esc(fmtMoney(p.mrp)) + " <small>/ " + esc(t("pack")[p.pack] || p.pack) + "</small></div>"
       : '<div class="rprice call">' + esc(t("callRate")) + "</div>";
     return '<li class="ritem' + (p.available ? "" : " out") + '" data-id="' + esc(p.id) + '">' +
-      '<div class="rname"><b>' + esc(p.name) + "</b>" + (p.bagKg != null ? "<small>" + esc(t("bag")(p.bagKg)) + "</small>" : "") + "</div>" +
+      '<div class="rname"><b>' + esc(p.name) + "</b><small>" + esc(packLabel(p)) + "</small></div>" +
       price +
       '<span class="tag' + (p.available ? "" : " off") + '">' + esc(p.available ? t("avail") : t("out")) + "</span>" +
       '<button type="button" class="btn sm keep" data-keep="' + esc(p.id) + '">' + esc(p.available ? t("keep") : t("ask")) + "</button></li>";
@@ -809,7 +828,7 @@ footer .staff{color:var(--hero-muted);font-size:13.5px;display:inline-flex;min-h
       var items = catalog.products.filter(function (p) { return p.category === c; }).sort(function (a, b) {
         return (b.available - a.available) || a.name.localeCompare(b.name, "en-IN");
       });
-      return '<div class="card rgroup" data-cat="' + c + '"><h3>' + esc(t("cat")[c]) + " <small>" + items.length + "</small></h3>" +
+      return '<div class="card rgroup" data-cat="' + esc(c) + '"><h3>' + esc(catLabel(c)) + " <small>" + items.length + "</small></h3>" +
         '<ul class="rlist">' + items.map(rowHtml).join("") + "</ul></div>";
     }).join("");
     var box = view.querySelector(".rgroups");
@@ -859,11 +878,11 @@ footer .staff{color:var(--hero-muted);font-size:13.5px;display:inline-flex;min-h
     var sel = $("#f-product"); var cur = sel.value;
     var html = '<option value="">' + esc(t("choose")) + "</option>";
     if (catalog) {
-      CATS.forEach(function (c) {
+      presentCats().forEach(function (c) {
         var items = catalog.products.filter(function (p) { return p.category === c; }).sort(function (a, b) { return a.name.localeCompare(b.name, "en-IN"); });
         if (!items.length) return;
-        html += '<optgroup label="' + esc(t("cat")[c]) + '">' + items.map(function (p) {
-          return '<option value="' + esc(p.id) + '">' + esc(p.name) + (p.bagKg != null ? " (" + esc(t("bag")(p.bagKg)) + ")" : "") + (p.available ? "" : " – " + esc(t("outShort"))) + "</option>";
+        html += '<optgroup label="' + esc(catLabel(c)) + '">' + items.map(function (p) {
+          return '<option value="' + esc(p.id) + '">' + esc(p.name) + " (" + esc(packLabel(p)) + ")" + (p.available ? "" : " – " + esc(t("outShort"))) + "</option>";
         }).join("") + "</optgroup>";
       });
     }
