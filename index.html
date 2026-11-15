@@ -7,9 +7,10 @@
 <meta name="description" content="ओढां (सिरसा) में नेशनल फर्टिलाइजर्स लिमिटेड के अधिकृत डीलर। खाद, बीज व कीटनाशक दवाइयां उच्च क्वालिटी व उचित रेट पर। हमारे उत्पाद देखें, रेट के लिए कॉल या WhatsApp करें: 9317929928।">
 <!-- DOMAIN: when the domain is bought, replace https://malhantradingcompany.in everywhere in this file, sitemap.xml and robots.txt (see README). -->
 <link rel="canonical" href="https://malhantradingcompany.in/">
-<meta name="theme-color" content="#123A22">
+<meta name="theme-color" content="#1D360B">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="img/icon-180.png">
 <link rel="preload" as="image" href="img/shop.webp" type="image/webp">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Malhan Trading Company">
@@ -60,9 +61,9 @@
 :root{
   --bg:#F4F5EF; --surface:#FFFFFF; --subtle:#F7F8F3; --ink:#142019; --ink-2:#38463D; --muted:#5F6C63;
   --line:#E2E6DC; --line-2:#CDD4C8;
-  --brand:#1D6B3B; --brand-h:#175A31; --brand-50:#E7F1E9; --on-brand:#FFFFFF;
-  --accent:#D8A31C; --accent-h:#C99413; --accent-ink:#7A5700; --accent-50:#FBF2D9; --on-accent:#1A1405;
-  --hero:#123A22; --hero-2:#0D2C19; --hero-ink:#F1F5EE; --hero-muted:#B7CDBB;
+  --brand:#1D360B; --brand-h:#142708; --brand-50:#E9EFE0; --on-brand:#FFFFFF;
+  --accent:#C9A35B; --accent-h:#B8914A; --accent-ink:#7A5A1E; --accent-50:#F7EEDB; --on-accent:#1D1405;
+  --hero:#1D360B; --hero-2:#14260A; --hero-ink:#F4F1E6; --hero-muted:#C5D0B5;
   --ok:#1D6B3B; --ok-50:#E3F0E6; --bad:#A8342A; --bad-50:#FBEAE8; --off:#6B726D; --off-50:#EEF0EC;
   --wa:#128C4A; --wa-h:#0F7A40;
   --shadow:0 1px 2px rgba(16,28,20,.06),0 2px 6px rgba(16,28,20,.04);
@@ -73,17 +74,17 @@
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#0F1511; --surface:#161E19; --subtle:#1A231D; --ink:#E6ECE7; --ink-2:#C3CEC6; --muted:#93A197; --line:#26312A; --line-2:#34423A;
-  --brand:#4FA66A; --brand-h:#5CB477; --brand-50:#1C3324; --on-brand:#08140C;
-  --accent:#E3B43E; --accent-h:#EDC157; --accent-ink:#E3B43E; --accent-50:#33290F;
-  --hero:#0F2A19; --hero-2:#0A1F12;
+  --brand:#8DBA62; --brand-h:#9CC772; --brand-50:#1F2D14; --on-brand:#0B1404;
+  --accent:#D9B670; --accent-h:#E3C384; --accent-ink:#D9B670; --accent-50:#2E2614;
+  --hero:#14260A; --hero-2:#0E1B07;
   --ok:#6CC287; --ok-50:#1C3324; --bad:#F0877C; --bad-50:#3A1F1C; --off:#A2ACA5; --off-50:#222B25;
   --shadow:none; --shadow-lg:0 18px 48px rgba(0,0,0,.5); color-scheme:dark;
 }}
 :root[data-theme="dark"]{
   --bg:#0F1511; --surface:#161E19; --subtle:#1A231D; --ink:#E6ECE7; --ink-2:#C3CEC6; --muted:#93A197; --line:#26312A; --line-2:#34423A;
-  --brand:#4FA66A; --brand-h:#5CB477; --brand-50:#1C3324; --on-brand:#08140C;
-  --accent:#E3B43E; --accent-h:#EDC157; --accent-ink:#E3B43E; --accent-50:#33290F;
-  --hero:#0F2A19; --hero-2:#0A1F12;
+  --brand:#8DBA62; --brand-h:#9CC772; --brand-50:#1F2D14; --on-brand:#0B1404;
+  --accent:#D9B670; --accent-h:#E3C384; --accent-ink:#D9B670; --accent-50:#2E2614;
+  --hero:#14260A; --hero-2:#0E1B07;
   --ok:#6CC287; --ok-50:#1C3324; --bad:#F0877C; --bad-50:#3A1F1C; --off:#A2ACA5; --off-50:#222B25;
   --shadow:none; --shadow-lg:0 18px 48px rgba(0,0,0,.5); color-scheme:dark;
 }
@@ -125,7 +126,9 @@ svg.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-widt
 .top{position:sticky;top:0;z-index:20;background:var(--bg);background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
 .top-in{display:flex;align-items:center;gap:10px;min-height:64px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);min-width:0;flex:1}
-.brand img{width:38px;height:38px;flex:none}
+.brand .emblem{flex:none}
+.emblem .leaf{fill:var(--brand);stroke:var(--bg);stroke-width:10;stroke-linejoin:round}
+.emblem .vein{fill:none;stroke:var(--accent);stroke-width:7;stroke-linecap:round}
 .brand b{display:block;font-size:16px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .brand small{display:block;font-size:12.5px;color:var(--muted);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .brand span{min-width:0}
@@ -142,7 +145,7 @@ svg.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-widt
 @media (min-width:560px){.callbtn .lbl{display:inline}.callbtn{padding:10px 16px}}
 
 /* Hero */
-.hero{background:radial-gradient(1200px 500px at 85% -10%,rgba(227,180,62,.16),transparent 60%),linear-gradient(160deg,var(--hero),var(--hero-2));color:var(--hero-ink);overflow:hidden}
+.hero{background:radial-gradient(1200px 500px at 85% -10%,rgba(201,163,91,.16),transparent 60%),linear-gradient(160deg,var(--hero),var(--hero-2));color:var(--hero-ink);overflow:hidden}
 .hero-in{display:grid;gap:0;padding-bottom:32px}
 .hero-photo{position:relative;margin:0 calc(-1 * var(--gut))}
 .hero-photo picture img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:50% 18%}
@@ -168,7 +171,7 @@ svg.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-widt
   .hero-photo::after{display:none}
   .cta{display:flex;flex-wrap:wrap}
 }
-.photo-tag{position:absolute;left:12px;bottom:12px;z-index:2;background:rgba(10,24,15,.78);color:#fff;font-size:13px;padding:6px 10px;border-radius:8px;display:none}
+.photo-tag{position:absolute;left:12px;bottom:12px;z-index:2;background:rgba(14,27,7,.78);color:#fff;font-size:13px;padding:6px 10px;border-radius:8px;display:none}
 @media (min-width:860px){.photo-tag{display:block}}
 
 /* Sections */
@@ -308,6 +311,7 @@ footer{background:var(--hero-2);color:var(--hero-muted);padding:40px 0 28px;font
 footer .wrap{display:grid;gap:22px}
 @media (min-width:860px){footer .wrap{grid-template-columns:1.2fr 1fr 1fr}}
 footer b{color:var(--hero-ink);display:block;font-size:16px;margin-bottom:6px}
+footer .flogo{display:block;width:min(260px,70vw);height:auto;margin:0 0 16px}
 footer a{color:var(--hero-ink)}
 footer ul{list-style:none;padding:0;margin:0;display:grid;gap:3px}
 footer .fine{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.1);padding-top:16px;display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:space-between;align-items:center}
@@ -344,7 +348,7 @@ footer .staff{color:var(--hero-muted);font-size:13.5px;display:inline-flex;min-h
 <header class="top">
   <div class="wrap top-in">
     <a class="brand" href="#top" aria-label="Malhan Trading Company">
-      <img src="img/logo.svg" alt="" width="38" height="38">
+      <svg class="emblem" viewBox="380 160 240 200" width="46" height="38" aria-hidden="true"><g transform="rotate(-34 500 383)"><path class="leaf" d="M500 195C534 239 534 311 500 355C466 311 466 239 500 195Z"/><path class="vein" d="M500 225V325"/></g><g transform="rotate(34 500 383)"><path class="leaf" d="M500 195C534 239 534 311 500 355C466 311 466 239 500 195Z"/><path class="vein" d="M500 225V325"/></g><path class="leaf" d="M500 169C538 219.6 538 302.4 500 353C462 302.4 462 219.6 500 169Z"/><path class="vein" d="M500 204V318"/></svg>
       <span><b><span class="hi" lang="hi">मल्हान ट्रेडिंग कम्पनी</span><span class="en" lang="en">Malhan Trading Company</span></b>
       <small><span class="hi" lang="hi">ओढां (सिरसा) · NFL डीलर</span><span class="en" lang="en">Odhan (Sirsa) · NFL dealer</span></small></span>
     </a>
@@ -563,6 +567,7 @@ footer .staff{color:var(--hero-muted);font-size:13.5px;display:inline-flex;min-h
 <footer>
   <div class="wrap">
     <div>
+      <picture><source srcset="img/logo-stacked.webp" type="image/webp"><img class="flogo" src="img/logo-stacked.png" width="260" height="153" loading="lazy" decoding="async" alt="मल्हान ट्रेडिंग कम्पनी का लोगो" data-alt-hi="मल्हान ट्रेडिंग कम्पनी का लोगो" data-alt-en="Malhan Trading Company logo"></picture>
       <b><span class="hi" lang="hi">मल्हान ट्रेडिंग कम्पनी</span><span class="en" lang="en">Malhan Trading Company</span></b>
       <p><span class="hi" lang="hi">नैक टाउन के पास, ओढां (सिरसा), हरियाणा 125077</span><span class="en" lang="en">Near Nac Town, Odhan (Sirsa), Haryana 125077</span></p>
       <p><span class="hi" lang="hi">फ़ोन / WhatsApp:</span><span class="en" lang="en">Phone / WhatsApp:</span> <a class="num" href="tel:+919317929928">9317929928</a></p>
