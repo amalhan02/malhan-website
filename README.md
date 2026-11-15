@@ -14,7 +14,9 @@ The public website for Malhan Trading Company, Odhan (Sirsa), Haryana.
 | `index.html` | The whole site: text, design and code |
 | `config.js` | Supabase address, public key, enquiry address, Turnstile site key, staff app link |
 | `img/shop.webp`, `img/shop.jpg` | Shop-front photo (WebP for most phones, JPEG as a fallback and for WhatsApp previews) |
-| `img/logo.svg` | The "M" logo and browser tab icon |
+| `img/logo.svg` | App icon (green square, three leaves): browser tab icon and the logo Google shows |
+| `img/icon-180.png` | Same icon for iPhone home screens |
+| `img/logo-stacked.webp`, `img/logo-stacked.png` | Full logo with light lettering, shown in the footer |
 | `CNAME` | The custom domain, `malhantradingcompany.in`. Don't delete it, or the domain stops working |
 | `robots.txt`, `sitemap.xml` | For Google |
 

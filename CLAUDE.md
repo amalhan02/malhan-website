@@ -5,7 +5,7 @@ Public site for a fertilizer, seed and pesticide shop in Odhan (Sirsa), Haryana,
 ## Architecture
 
 - **No build step, no frameworks, no web fonts, no supabase-js.** Everything is in `index.html` (inline CSS and JS). The owner edits text in GitHub's web UI, and farmers load it on old Android phones over village 4G.
-- **Page weight budget: under 300 KB total** (currently ~150 KB: HTML ~73 KB + hero WebP ~78 KB). Don't add libraries or big images.
+- **Page weight budget: under 300 KB total** (currently ~172 KB: HTML ~78 KB + hero WebP ~78 KB + footer logo WebP ~16 KB). Don't add libraries or big images.
 - `config.js` holds `supabaseUrl`, the publishable anon key, `enquiryUrl`, `turnstileSiteKey` and `appUrl`. Never commit a `service_role` / secret key.
 - Backend lives in the app repo (`malhan-trading-company`: `schema.sql`, `supabase/functions/enquiry/index.ts`). Code against these contracts:
   - **Rates:** `POST {supabaseUrl}/rest/v1/rpc/public_catalog`, headers `apikey` + `Content-Type: application/json`, body `{}`. **No `Authorization` header** (the key is a publishable key, not a JWT). Returns `{updatedAt, products:[{id, name, category, bagKg|null, pack: bag|bottle|can|packet|piece, size|null, sizeUnit: kg|g|L|ml, mrp|null, available}]}`. `category` is free text: Fertilizer, Seed, Pesticide and Other have translations in `T`; custom ones (added by managers in the app) show as typed, after the built-ins and before Other. Sizes show as `packLabel()` ("500 ml bottle"), prices "per <pack>". `bagKg` is legacy; use `size`.
@@ -26,7 +26,8 @@ Only phone number shown anywhere: **9317929928** (WhatsApp `wa.me/919317929928`)
 
 ## Conventions
 
-- Design tokens on `:root` with light and dark themes (`prefers-color-scheme`, plus `data-theme` override), matching the app: earthy green `--brand`, NFL yellow `--accent`; the hero and footer are always deep green.
+- Design tokens on `:root` with light and dark themes (`prefers-color-scheme`, plus `data-theme` override), taken from the company logo: deep green `--brand` `#1D360B`, gold `--accent` `#C9A35B` (use `--accent-ink` for gold text on light backgrounds; plain gold on white fails contrast). Brick red appears only inside the logo images, never as a token. The hero and footer are always deep green. Status colours (`--ok`, `--bad`, `--off`, `--wa`) are separate from the brand and stay as they are. The app still uses the older green/yellow.
+- Logo: `img/logo.svg` is the app icon (favicon, JSON-LD `logo`), `img/icon-180.png` the apple-touch-icon, `img/logo-stacked.{webp,png}` the footer lockup (light lettering, for the deep-green footer). The header emblem is inline SVG coloured by `--brand`/`--accent` so it follows dark mode — don't swap it for an `<img>`.
 - Sentence-case labels; no all-caps eyebrow labels.
 - Mobile first: works at 360px with no horizontal scroll; tap targets at least 44px; floating WhatsApp button below 900px.
 - Indian formatting: `₹` via `Intl.NumberFormat("en-IN")`, dates like "15 Nov 2026" (`en-IN`, `month: "short"`), times like "10:20 am".
