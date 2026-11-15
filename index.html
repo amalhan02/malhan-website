@@ -60,12 +60,13 @@
 <style>
 /* Clean white + green theme, taken from the company logo. One light theme only. */
 :root{
-  --bg:#FFFFFF; --surface:#FFFFFF; --subtle:#F5F8F1; --tint:#EDF3E5; --ink:#17200F; --ink-2:#3B4733; --muted:#5E6A55;
+  --bg:#FFFFFF; --surface:#FFFFFF; --subtle:#F4F9EF; --tint:#E8F3DC; --ink:#17200F; --ink-2:#3B4733; --muted:#5E6A55;
   --line:#E3E8DC; --line-2:#CFD8C4;
-  --brand:#1D360B; --brand-h:#2A4A12; --brand-50:#EDF3E5; --on-brand:#FFFFFF; --leaf:#457424;
-  --accent:#C9A35B; --accent-ink:#86621F; --accent-50:#FAF4E6; --on-accent:#1D1405; --gold-l:#E8D29B;
+  --brand:#1D360B; --brand-h:#2A4A12; --brand-50:#E8F3DC; --on-brand:#FFFFFF; --leaf:#3F7D1E;
+  --accent:#8BC34A; --accent-ink:#3F6B12; --accent-50:#EEF7E3; --on-accent:#132008; --gold:#C9A35B; --gold-l:#E8D29B;
+  --lime:#8BC34A; --lime-l:#C5E1A5;
   --ok:#3C6419; --ok-50:#EAF2DF; --bad:#A8342A; --bad-50:#FBEAE8; --off:#5E6157; --off-50:#EEF0EA;
-  --wa:#1E7B3A; --wa-i:#25A244; --focus:#86621F;
+  --wa:#1E7B3A; --wa-i:#25A244; --focus:#3F7D1E;
   --shadow:0 1px 2px rgba(23,32,15,.04),0 6px 20px rgba(23,32,15,.05);
   --shadow-h:0 2px 6px rgba(23,32,15,.06),0 18px 40px rgba(23,32,15,.10);
   --shadow-lg:0 24px 60px rgba(23,32,15,.16);
@@ -113,7 +114,7 @@ svg.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-widt
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);min-width:0;flex:1}
 .brand .emblem{flex:none}
 .emblem .leaf{fill:var(--brand);stroke:var(--bg);stroke-width:10;stroke-linejoin:round}
-.emblem .vein{fill:none;stroke:var(--accent);stroke-width:7;stroke-linecap:round}
+.emblem .vein{fill:none;stroke:var(--gold);stroke-width:7;stroke-linecap:round}
 .brand b{display:block;font-size:16.5px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--brand);font-weight:750}
 .brand small{display:block;font-size:12.5px;color:var(--muted);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .brand span{min-width:0}
@@ -129,8 +130,13 @@ svg.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-widt
 .callbtn{padding:10px 13px}
 @media (min-width:560px){.callbtn .lbl{display:inline}.callbtn{padding:10px 18px}}
 
-/* Hero: bright, photo-led */
-.hero{position:relative;overflow:hidden;background:radial-gradient(700px 420px at 90% 0%,var(--tint),transparent 70%),radial-gradient(600px 380px at 0% 100%,var(--accent-50),transparent 70%),var(--bg)}
+/* Hero: bold deep green; on desktop the shop photo, blurred and tinted, becomes the background texture */
+.hero{position:relative;overflow:hidden;isolation:isolate;color:#fff;background:radial-gradient(700px 420px at 95% 0%,rgba(139,195,74,.18),transparent 65%),linear-gradient(160deg,#1D360B,#132508)}
+@media (min-width:860px){
+  .hero{background:#14260A}
+  .hero::before{content:"";position:absolute;inset:-40px;z-index:-2;background:url(img/shop.webp) center 35%/cover;filter:blur(16px) saturate(1.15);transform:scale(1.06)}
+  .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(100deg,rgba(17,33,8,.95) 0%,rgba(20,38,10,.88) 48%,rgba(20,38,10,.70) 100%)}
+}
 .hero-in{display:grid;gap:26px;padding-top:18px;padding-bottom:44px}
 .hero-photo{position:relative}
 .hero-photo picture img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:50% 22%;border-radius:var(--r-lg);box-shadow:var(--shadow-lg)}
@@ -139,12 +145,19 @@ svg.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-widt
 .photo-card b{display:block;font-size:15.5px;color:var(--brand);line-height:1.25}
 .photo-card small{display:block;font-size:13.5px;color:var(--muted);line-height:1.3}
 .hero-copy{padding-top:18px}
-.dealer{display:inline-flex;align-items:flex-start;gap:8px;background:var(--tint);color:var(--brand);font-weight:650;font-size:14px;padding:7px 14px;border-radius:999px;line-height:1.35;max-width:100%}
-.dealer svg{width:18px;height:18px;margin-top:1px;color:var(--leaf)}
+.dealer{display:inline-flex;align-items:flex-start;gap:8px;background:rgba(139,195,74,.16);border:1px solid rgba(197,225,165,.28);color:#DDEFC8;font-weight:650;font-size:14px;padding:7px 14px;border-radius:999px;line-height:1.35;max-width:100%}
+.dealer svg{width:18px;height:18px;margin-top:1px;color:var(--lime-l)}
 @media (max-width:559px){.dealer{border-radius:14px}}
-.hero h1{margin-top:18px;font-size:clamp(34px,7.8vw,58px);font-weight:800;letter-spacing:-.02em;color:var(--brand)}
-.hero h1 .h-en{display:block;font-size:.42em;font-weight:650;color:var(--accent-ink);margin-top:10px;letter-spacing:.04em}
-.tagline{margin-top:16px;font-size:clamp(18px,2.4vw,21px);color:var(--ink-2);max-width:30em}
+.hero h1{margin-top:18px;font-size:clamp(34px,7.8vw,58px);font-weight:800;letter-spacing:-.02em;color:#fff}
+.hero h1 .h-en{display:block;font-size:.42em;font-weight:650;color:var(--lime-l);margin-top:10px;letter-spacing:.04em}
+.tagline{margin-top:16px;font-size:clamp(18px,2.4vw,21px);color:#E6EFDC;max-width:30em}
+.hero .btn.big{background:var(--lime);color:#132008;box-shadow:0 10px 26px rgba(139,195,74,.28)}
+.hero .btn.big:hover{background:#9CCC5E}
+.hero .btn.big svg{color:#132008}
+.hero .btn.line{background:rgba(255,255,255,.07);color:#fff;border-color:rgba(255,255,255,.38)}
+.hero .btn.line:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.6)}
+.hero .btn.wa-l svg{color:#7BE495}
+.hero-photo picture img{box-shadow:0 0 0 1px rgba(197,225,165,.25),0 30px 70px rgba(0,0,0,.45)}
 .tagline .en,.tagline .hi{display:block}
 .cta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:26px}
 .cta .btn{min-height:52px;font-size:16px}
@@ -205,7 +218,7 @@ section.s{padding:60px 0}
 .rgroups{display:grid;gap:20px}
 .rgroup{overflow:hidden}
 .rgroup h3{display:flex;align-items:center;gap:10px;padding:18px 22px 14px;font-size:19px;font-weight:750;color:var(--brand)}
-.rgroup h3 small{font-size:13px;font-weight:700;color:var(--leaf);background:var(--tint);border-radius:999px;padding:2px 10px}
+.rgroup h3 small{font-size:13px;font-weight:700;color:var(--accent-ink);background:var(--tint);border-radius:999px;padding:2px 10px}
 .rlist{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
 @media (min-width:640px){.rlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));margin:0 -1px -1px 0}.rlist .ritem{border-top:0;box-shadow:inset -1px -1px 0 var(--line)}}
 .ritem{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"name price" "tag btn";gap:8px 12px;align-items:center;padding:16px 22px;border-top:1px solid var(--line)}
